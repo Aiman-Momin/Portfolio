@@ -1,0 +1,1458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aiman Momin - Blockchain Developer Portfolio</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-bg: #000000;
+            --secondary-bg: #0a0a0a;
+            --card-bg: #141414;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a0;
+            --accent-color: #00d4ff;
+            --accent-hover: #00a8cc;
+            --gradient-1: linear-gradient(135deg, #00d4ff 0%, #0066ff 100%);
+            --gradient-2: linear-gradient(45deg, #00d4ff, #ff00ff);
+            --gradient-3: linear-gradient(90deg, #00d4ff, #00ff88);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--primary-bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        /* Scrollbar Styling */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: var(--secondary-bg);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent-color);
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-hover);
+        }
+        
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            padding: 1.5rem 0;
+            transition: all 0.3s ease;
+        }
+        
+        nav.scrolled {
+            padding: 1rem 0;
+            background: rgba(0, 0, 0, 0.95);
+            box-shadow: 0 4px 30px rgba(0, 212, 255, 0.1);
+        }
+        
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 900;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -1px;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            font-size: 0.95rem;
+            position: relative;
+        }
+        
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-1);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        /* Mobile Menu Toggle */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+        
+        .menu-toggle span {
+            width: 25px;
+            height: 2px;
+            background: var(--text-primary);
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+        
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(0, 212, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 0, 255, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(0, 255, 136, 0.05) 0%, transparent 50%);
+            z-index: 0;
+        }
+        
+        .hero-grid {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(0, 212, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 212, 255, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: 0;
+        }
+        
+        .hero-content {
+            max-width: 1000px;
+            text-align: left;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero-badge {
+            display: inline-block;
+            background: rgba(0, 212, 255, 0.1);
+            color: var(--accent-color);
+            padding: 0.6rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+        
+        .hero h1 {
+            font-size: 5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 900;
+            line-height: 1.1;
+            background: linear-gradient(to right, var(--text-primary), var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .hero h2 {
+            font-size: 2rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            font-weight: 400;
+            line-height: 1.4;
+        }
+        
+        .hero p {
+            font-size: 1.3rem;
+            color: var(--text-secondary);
+            margin-bottom: 3rem;
+            max-width: 600px;
+            line-height: 1.6;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            font-family: 'Inter', sans-serif;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .btn:hover::before {
+            left: 100%;
+        }
+        
+        .btn-primary {
+            background: var(--gradient-1);
+            color: white;
+            box-shadow: 0 4px 20px rgba(0, 212, 255, 0.3);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(0, 212, 255, 0.4);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-primary);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .btn-secondary:hover {
+            border-color: var(--accent-color);
+            background: rgba(0, 212, 255, 0.05);
+        }
+        
+        /* Section Styling */
+        section {
+            padding: 8rem 3rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+        
+        .section-title {
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .section-subtitle {
+            font-size: 1.3rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+            align-items: center;
+        }
+        
+        .about-visual {
+            position: relative;
+            height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .about-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 3rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .about-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--gradient-1);
+        }
+        
+        .about-card h3 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+        }
+        
+        .about-card p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+        
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 2px;
+            background: var(--gradient-1);
+            opacity: 0.3;
+        }
+        
+        .timeline-item {
+            position: relative;
+            padding-bottom: 3rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .timeline-item:hover {
+            transform: translateX(10px);
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2.3rem;
+            top: 0;
+            width: 12px;
+            height: 12px;
+            background: var(--gradient-1);
+            border-radius: 50%;
+            border: 3px solid var(--primary-bg);
+        }
+        
+        .timeline-item h3 {
+            color: var(--accent-color);
+            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+        
+        .timeline-item p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+        }
+        
+        /* Education Section */
+        .education-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 4rem;
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .education-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--gradient-1);
+        }
+        
+        .education-card i {
+            font-size: 4rem;
+            color: var(--accent-color);
+            margin-bottom: 2rem;
+        }
+        
+        .education-card h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+        
+        .education-card p {
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+        
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 3rem;
+        }
+        
+        .project-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            overflow: hidden;
+            transition: all 0.4s ease;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--gradient-1);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+        
+        .project-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0, 212, 255, 0.2);
+            border-color: rgba(0, 212, 255, 0.3);
+        }
+        
+        .project-content {
+            padding: 3rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .project-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(0, 212, 255, 0.1);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+        
+        .project-icon i {
+            font-size: 1.8rem;
+            color: var(--accent-color);
+        }
+        
+        .project-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+            font-weight: 700;
+        }
+        
+        .project-description {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            flex-grow: 1;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+        
+        .project-links {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .project-link {
+            color: var(--accent-color);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            background: rgba(0, 212, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .project-link:hover {
+            background: rgba(0, 212, 255, 0.1);
+            gap: 1rem;
+        }
+        
+        /* Skills Section */
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .skill-category {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 3rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .skill-category:hover {
+            transform: translateY(-5px);
+            border-color: rgba(0, 212, 255, 0.3);
+            box-shadow: 0 15px 50px rgba(0, 212, 255, 0.2);
+        }
+        
+        .skill-category h3 {
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .skill-category h3 i {
+            color: var(--accent-color);
+        }
+        
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+        
+        .skill-tag {
+            background: var(--secondary-bg);
+            color: var(--text-secondary);
+            padding: 0.6rem 1.2rem;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .skill-tag:hover {
+            background: var(--gradient-1);
+            color: white;
+            border-color: transparent;
+            transform: translateY(-2px);
+        }
+        
+        /* Objectives Section */
+        .objectives {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 5rem;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .objectives::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--gradient-1);
+        }
+        
+        .objectives p {
+            font-size: 1.4rem;
+            line-height: 1.8;
+            color: var(--text-secondary);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        /* Contact Section */
+        .contact-container {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 4rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .contact-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--gradient-1);
+        }
+        
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .contact-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2.5rem;
+            border-radius: 15px;
+            background: var(--secondary-bg);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-align: center;
+        }
+        
+        .contact-item:hover {
+            background: rgba(0, 212, 255, 0.05);
+            transform: translateY(-5px);
+        }
+        
+        .contact-item i {
+            font-size: 2.5rem;
+            color: var(--accent-color);
+            width: 70px;
+            height: 70px;
+            background: rgba(0, 212, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .contact-item:hover i {
+            background: var(--gradient-1);
+            color: white;
+            transform: scale(1.1);
+        }
+        
+        .contact-item h4 {
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+        
+        .contact-item p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--secondary-bg);
+            padding: 4rem;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 3rem;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .social-links a {
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            color: var(--accent-color);
+            background: rgba(0, 212, 255, 0.1);
+            transform: translateY(-3px);
+        }
+        
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: var(--gradient-1);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 999;
+        }
+        
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .back-to-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
+        }
+        
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 10000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal.show {
+            display: flex;
+        }
+        
+        .modal-content {
+            background: var(--card-bg);
+            padding: 2.5rem;
+            border-radius: 15px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            border: 1px solid var(--border-color);
+        }
+        
+        .modal-content h3 {
+            color: var(--accent-color);
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+        
+        .modal-content p {
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            word-break: break-all;
+        }
+        
+        .modal-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+        
+        .copy-btn {
+            background: var(--gradient-1);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .copy-btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        .close-btn {
+            background: transparent;
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .close-btn:hover {
+            border-color: var(--accent-color);
+            color: var(--accent-color);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .hero h1 {
+                font-size: 4rem;
+            }
+            
+            .section-title {
+                font-size: 3rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .menu-toggle {
+                display: flex;
+            }
+            
+            .hero h1 {
+                font-size: 3rem;
+            }
+            
+            .hero h2 {
+                font-size: 1.5rem;
+            }
+            
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-info {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            section {
+                padding: 5rem 1.5rem;
+            }
+            
+            .nav-container {
+                padding: 0 1.5rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .contact-info {
+                grid-template-columns: 1fr;
+            }
+            
+            .modal-buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <div class="logo">Aiman Momin</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-grid"></div>
+        <div class="hero-content" data-aos="fade-up">
+            <div class="hero-badge">
+                <i class="fas fa-rocket"></i> Blockchain Developer
+            </div>
+            <h1>Hi, I'm Aiman Momin</h1>
+            <h2>Building the Future of Decentralized Applications</h2>
+            <p>I specialize in creating innovative blockchain solutions and smart contracts that solve real-world problems with cutting-edge technology.</p>
+            <div class="hero-buttons">
+                <a href="#projects" class="btn btn-primary">View My Work</a>
+                <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="section-header" data-aos="fade-up">
+            <h2 class="section-title">About Me</h2>
+            <p class="section-subtitle">My journey from traditional programming to blockchain innovation</p>
+        </div>
+        <div class="about-content">
+            <div class="about-visual" data-aos="fade-right">
+                <div class="about-card">
+                    <h3>Passionate Blockchain Developer</h3>
+                    <p>I started my coding journey with fundamental programming languages and gradually discovered my passion for blockchain technology. Today, I focus on building decentralized applications that make a real impact in the world.</p>
+                </div>
+            </div>
+            <div class="timeline" data-aos="fade-left">
+                <div class="timeline-item">
+                    <h3>C++ Foundation</h3>
+                    <p>Mastered programming fundamentals and object-oriented concepts</p>
+                </div>
+                <div class="timeline-item">
+                    <h3>Java Development</h3>
+                    <p>Built robust applications and deepened understanding of software architecture</p>
+                </div>
+                <div class="timeline-item">
+                    <h3>Web Technologies</h3>
+                    <p>Explored JavaScript and modern web development frameworks</p>
+                </div>
+                <div class="timeline-item">
+                    <h3>Blockchain Revolution</h3>
+                    <p>Found my calling in smart contracts and decentralized systems</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education">
+        <div class="section-header" data-aos="fade-up">
+            <h2 class="section-title">Education</h2>
+            <p class="section-subtitle">Academic background and certifications</p>
+        </div>
+        <div class="education-card" data-aos="zoom-in">
+            <i class="fas fa-graduation-cap"></i>
+            <h3>BSc Blockchain</h3>
+            <p>Savitribai Phule Pune University</p>
+            <p>2024 – 2027</p>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <div class="section-header" data-aos="fade-up">
+            <h2 class="section-title">Featured Projects</h2>
+            <p class="section-subtitle">A showcase of my latest work and innovations</p>
+        </div>
+        <div class="projects-grid">
+            <div class="project-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="project-content">
+                    <div class="project-icon">
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <h3 class="project-title">Smart Study Scheduler</h3>
+                    <p class="project-description">An intelligent web application that creates personalized study plans based on individual goals, available time, and difficulty levels. Built with modern web technologies for optimal user experience.</p>
+                    <div class="project-links">
+                        <a href="https://aiman-momin.github.io/smart-study-scheduler/" class="project-link" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Live Demo
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="project-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="project-content">
+                    <div class="project-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3 class="project-title">Student Grade Tracker</h3>
+                    <p class="project-description">A comprehensive console-based Java application for managing and analyzing student academic performance. Features include grade calculation, statistical analysis, and detailed reporting capabilities.</p>
+                    <div class="project-links">
+                        <a href="https://github.com/Aiman-Momin/StudentGradeTracker" class="project-link" target="_blank">
+                            <i class="fab fa-github"></i> GitHub
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="project-card" data-aos="fade-up" data-aos-delay="300">
+                <div class="project-content">
+                    <div class="project-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3 class="project-title">Deadman's Wallet</h3>
+                    <p class="project-description">An innovative blockchain-based inheritance system using smart contracts to automate asset transfer upon inactivity. Ensures digital assets are securely passed to beneficiaries according to predefined conditions.</p>
+                    <div class="project-links">
+                        <a href="https://github.com/Aiman-Momin/deadmans-wallet" class="project-link" target="_blank">
+                            <i class="fab fa-github"></i> GitHub
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="project-card" data-aos="fade-up" data-aos-delay="400">
+                <div class="project-content">
+                    <div class="project-icon">
+                        <i class="fas fa-heartbeat"></i>
+                    </div>
+                    <h3 class="project-title">Preventive Care</h3>
+                    <p class="project-description">A Move-based smart contract module on Aptos blockchain facilitating micro-payments for preventive healthcare services. Enables secure, transparent transactions between patients and healthcare providers.</p>
+                    <div class="project-links">
+                        <a href="https://github.com/Aiman-Momin/Preventive-Care" class="project-link" target="_blank">
+                            <i class="fab fa-github"></i> GitHub
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="project-card" data-aos="fade-up" data-aos-delay="500">
+                <div class="project-content">
+                    <div class="project-icon">
+                        <i class="fas fa-key"></i>
+                    </div>
+                    <h3 class="project-title">Password Generator</h3>
+                    <p class="project-description">A secure and user-friendly password generation tool with customizable options for length, character types, and complexity. Built with vanilla JavaScript for maximum compatibility and security.</p>
+                    <div class="project-links">
+                        <a href="https://github.com/Aiman-Momin/password-generator" class="project-link" target="_blank">
+                            <i class="fab fa-github"></i> GitHub
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="project-card" data-aos="fade-up" data-aos-delay="600">
+                <div class="project-content">
+                    <div class="project-icon">
+                        <i class="fas fa-gamepad"></i>
+                    </div>
+                    <h3 class="project-title">Rock–Paper–Scissors</h3>
+                    <p class="project-description">An engaging browser-based implementation of the classic game with modern UI design, emoji integration, score tracking, and smooth animations. Demonstrates frontend development skills and user experience design.</p>
+                    <div class="project-links">
+                        <a href="https://github.com/Aiman-Momin/Rock-Paper-Scissor" class="project-link" target="_blank">
+                            <i class="fab fa-github"></i> GitHub
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="project-card" data-aos="fade-up" data-aos-delay="700">
+                <div class="project-content">
+                    <div class="project-icon">
+                        <i class="fas fa-th"></i>
+                    </div>
+                    <h3 class="project-title">Sudoku Game</h3>
+                    <p class="project-description">A console-based Sudoku puzzle game showcasing object-oriented programming principles and algorithmic problem-solving. Features puzzle generation, validation, and solving capabilities.</p>
+                    <div class="project-links">
+                        <a href="https://github.com/Aiman-Momin/Sudoku-Game" class="project-link" target="_blank">
+                            <i class="fab fa-github"></i> GitHub
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+        <div class="section-header" data-aos="fade-up">
+            <h2 class="section-title">Technical Skills</h2>
+            <p class="section-subtitle">Technologies and tools I specialize in</p>
+        </div>
+        <div class="skills-container">
+            <div class="skill-category" data-aos="fade-up" data-aos-delay="100">
+                <h3><i class="fas fa-laptop-code"></i> Programming Languages</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">Java</span>
+                    <span class="skill-tag">C++</span>
+                    <span class="skill-tag">Python</span>
+                    <span class="skill-tag">JavaScript</span>
+                </div>
+            </div>
+            
+            <div class="skill-category" data-aos="fade-up" data-aos-delay="200">
+                <h3><i class="fas fa-globe"></i> Web Development</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">HTML5</span>
+                    <span class="skill-tag">CSS3</span>
+                    <span class="skill-tag">JavaScript ES6+</span>
+                    <span class="skill-tag">Responsive Design</span>
+                </div>
+            </div>
+            
+            <div class="skill-category" data-aos="fade-up" data-aos-delay="300">
+                <h3><i class="fas fa-cube"></i> Blockchain Technologies</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">Solidity</span>
+                    <span class="skill-tag">Move Language</span>
+                    <span class="skill-tag">Smart Contracts</span>
+                    <span class="skill-tag">dApp Development</span>
+                    <span class="skill-tag">Web3 Integration</span>
+                </div>
+            </div>
+            
+            <div class="skill-category" data-aos="fade-up" data-aos-delay="400">
+                <h3><i class="fas fa-tools"></i> Development Tools</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">Git & GitHub</span>
+                    <span class="skill-tag">VS Code</span>
+                    <span class="skill-tag">Truffle Suite</span>
+                    <span class="skill-tag">Hardhat</span>
+                </div>
+            </div>
+            
+            <div class="skill-category" data-aos="fade-up" data-aos-delay="500">
+                <h3><i class="fas fa-chart-bar"></i> Data & Analytics</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">Power BI</span>
+                    <span class="skill-tag">Data Visualization</span>
+                    <span class="skill-tag">SQL</span>
+                </div>
+            </div>
+            
+            <div class="skill-category" data-aos="fade-up" data-aos-delay="600">
+                <h3><i class="fas fa-brain"></i> Core Competencies</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">Problem Solving</span>
+                    <span class="skill-tag">Debugging</span>
+                    <span class="skill-tag">OOP Design</span>
+                    <span class="skill-tag">Research</span>
+                    <span class="skill-tag">Algorithm Design</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Objectives Section -->
+    <section id="objectives">
+        <div class="section-header" data-aos="fade-up">
+            <h2 class="section-title">Career Objectives</h2>
+            <p class="section-subtitle">Where I'm headed and what I'm looking for</p>
+        </div>
+        <div class="objectives" data-aos="zoom-in">
+            <p>I am seeking opportunities to grow under expert mentorship, contribute to impactful blockchain applications, and sharpen both frontend dApp and smart contract development skills in enterprise and Web3 environments. My goal is to be at the forefront of blockchain innovation while building solutions that make a meaningful difference.</p>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="section-header" data-aos="fade-up">
+            <h2 class="section-title">Get In Touch</h2>
+            <p class="section-subtitle">Let's connect and explore opportunities together</p>
+        </div>
+        <div class="contact-container" data-aos="fade-up">
+            <div class="contact-info">
+                <div class="contact-item" onclick="openEmail()">
+                    <i class="fas fa-envelope"></i>
+                    <h4>Email</h4>
+                    <p>Send me a message</p>
+                </div>
+                <div class="contact-item" onclick="openPhone()">
+                    <i class="fas fa-phone"></i>
+                    <h4>Phone</h4>
+                    <p>Give me a call</p>
+                </div>
+                <div class="contact-item" onclick="openLinkedIn()">
+                    <i class="fab fa-linkedin"></i>
+                    <h4>LinkedIn</h4>
+                    <p>Connect with me</p>
+                </div>
+                <div class="contact-item" onclick="openGitHub()">
+                    <i class="fab fa-github"></i>
+                    <h4>GitHub</h4>
+                    <p>View my code</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="social-links">
+                <a href="https://github.com/Aiman-Momin" target="_blank" title="GitHub">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="https://linkedin.com/in/aiman-momin-d11" target="_blank" title="LinkedIn">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="mailto:aiman.momin999@gmail.com" title="Email">
+                    <i class="fas fa-envelope"></i>
+                </a>
+            </div>
+            <p>© 2025 Aiman Momin. All rights reserved. Built with passion for blockchain technology.</p>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <div class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <!-- Email Modal -->
+    <div id="emailModal" class="modal">
+        <div class="modal-content">
+            <h3><i class="fas fa-envelope"></i> Email Address</h3>
+            <p id="emailAddress">aiman.momin999@gmail.com</p>
+            <div class="modal-buttons">
+                <button class="copy-btn" onclick="copyEmail()">Copy Email</button>
+                <button class="close-btn" onclick="closeModal('emailModal')">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 1000,
+            once: true,
+            offset: 100
+        });
+        
+        // Contact functions
+        function openEmail() {
+            const email = 'aiman.momin999@gmail.com';
+            const subject = 'Portfolio Contact';
+            const body = 'Hi Aiman,\n\nI came across your portfolio and would like to connect with you.\n\nBest regards,\n[Your Name]';
+            
+            // Try to open mail client
+            window.location.href = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            
+            // Fallback: show modal if mailto doesn't work
+            setTimeout(() => {
+                if (!document.hasFocus() || !document.activeElement || document.activeElement.tagName !== 'A') {
+                    document.getElementById('emailModal').classList.add('show');
+                }
+            }, 500);
+        }
+        
+        function openPhone() {
+            // Try to open phone dialer, fallback to showing number
+            if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                window.open('tel:+919766515655', '_self');
+            } else {
+                // For desktop, show the number in a modal
+                const phoneModal = document.createElement('div');
+                phoneModal.style.cssText = `
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background: rgba(0, 0, 0, 0.8);
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    z-index: 10000;
+                `;
+                phoneModal.id = 'phoneModal';
+                phoneModal.className = 'modal show';
+                phoneModal.innerHTML = `
+                    <div class="modal-content">
+                        <h3><i class="fas fa-phone"></i> Phone Number</h3>
+                        <p>+91 97665 15655</p>
+                        <div class="modal-buttons">
+                            <button class="copy-btn" onclick="copyPhone()">Copy Number</button>
+                            <button class="close-btn" onclick="closeModal('phoneModal')">Close</button>
+                        </div>
+                    </div>
+                `;
+                document.body.appendChild(phoneModal);
+            }
+        }
+        
+        function openLinkedIn() {
+            window.open('https://linkedin.com/in/aiman-momin-d11', '_blank');
+        }
+        
+        function openGitHub() {
+            window.open('https://github.com/Aiman-Momin', '_blank');
+        }
+        
+        // Copy functions
+        function copyEmail() {
+            const email = document.getElementById('emailAddress').textContent;
+            navigator.clipboard.writeText(email).then(() => {
+                alert('Email copied to clipboard!');
+            }).catch(() => {
+                // Fallback for older browsers
+                const textArea = document.createElement('textarea');
+                textArea.value = email;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                alert('Email copied to clipboard!');
+            });
+        }
+        
+        function copyPhone() {
+            const phone = '+91 97665 15655';
+            navigator.clipboard.writeText(phone).then(() => {
+                alert('Phone number copied to clipboard!');
+            }).catch(() => {
+                // Fallback for older browsers
+                const textArea = document.createElement('textarea');
+                textArea.value = phone;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                alert('Phone number copied to clipboard!');
+            });
+        }
+        
+        // Close modal
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.classList.remove('show');
+                setTimeout(() => {
+                    if (modal.parentNode) {
+                        modal.parentNode.removeChild(modal);
+                    }
+                }, 300);
+            }
+        }
+        
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Back to top button
+        const backToTopButton = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTopButton.classList.add('visible');
+            } else {
+                backToTopButton.classList.remove('visible');
+            }
+        });
+        
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Mobile menu toggle (basic implementation)
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.querySelector('.nav-links');
+        
+        menuToggle.addEventListener('click', () => {
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+        });
+    </script>
+</body>
+</html>

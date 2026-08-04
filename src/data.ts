@@ -53,10 +53,15 @@ export const portfolioData = {
       title: "Sudoku Game",
       description: "A classic Sudoku game with a modern and interactive UI.",
       link: "https://github.com/Aiman-Momin/Sudoku-Game",
+    },
+    {
+      title: "Nasreen Collections",
+      description: "Built and deployed a complete e-commerce storefront for a small toy shop with responsive design and modern UI.",
+      link: "https://github.com/Aiman-Momin/Nasreen-Collection",
     }
   ],
   skills: [
-    "Blockchain fundamentals", "C++", "Java", "JavaScript", "Web Technologies", "Frontend Development", "Smart Contract Development", "GitHub"
+    "Blockchain fundamentals", "C++", "Java", "JavaScript", "Web Technologies", "Frontend Development", "Smart Contract Development", "GitHub", "TypeScript", "React", "Vercel"
   ],
   contact: {
     email: "aimanmomin999@gmail.com",

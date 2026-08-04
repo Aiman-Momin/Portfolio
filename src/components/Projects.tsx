@@ -1,33 +1,62 @@
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { portfolioData } from '../data';
 import { useInView } from 'react-intersection-observer';
-import { ExternalLink, Github, ArrowUpRight } from 'lucide-react';
+import { ExternalLink } from 'lucide-react';
 
 const imageMap: Record<string, string> = {
-  'EtherMuseum': '/images/museum.png',
+  EtherMuseum: '/images/museum.png',
   'Continnum Protocol': '/images/continnum.png',
   'A Collaborative Whiteboard': '/images/whiteboard.png',
   'Student Grade Tracker': '/images/grade.png',
   'Smart Study Scheduler': '/images/study.png',
   'Sudoku Game': '/images/sudoku.png',
+  'Nasreen Collections': '/images/nasreen.png',
 };
 
 const tagMap: Record<string, string[]> = {
-  'EtherMuseum': ['Solidity', 'React', 'Web3'],
+  EtherMuseum: ['Solidity', 'React', 'Web3'],
   'Continnum Protocol': ['Blockchain', 'Solidity', 'DApp'],
   'A Collaborative Whiteboard': ['React', 'Socket.io', 'Canvas'],
   'Student Grade Tracker': ['Java', 'Data'],
   'Smart Study Scheduler': ['TypeScript', 'React'],
   'Sudoku Game': ['JavaScript', 'UI'],
+  'Nasreen Collections': ['TypeScript', 'React', 'Vercel'],
+};
+
+const fallbackImage = (title: string) => {
+  const normalized = title.toLowerCase();
+
+  if (normalized.includes('museum') || normalized.includes('ether')) {
+    return 'https://source.unsplash.com/900x600/?art,museum,blockchain';
+  }
+
+  if (normalized.includes('grade') || normalized.includes('student')) {
+    return 'https://source.unsplash.com/900x600/?education,grade,analytics';
+  }
+
+  if (normalized.includes('protocol') || normalized.includes('blockchain')) {
+    return 'https://source.unsplash.com/900x600/?crypto,security,technology';
+  }
+
+  if (normalized.includes('whiteboard')) {
+    return 'https://source.unsplash.com/900x600/?whiteboard,collaboration,team';
+  }
+
+  if (normalized.includes('study')) {
+    return 'https://source.unsplash.com/900x600/?study,planner,student';
+  }
+
+  if (normalized.includes('sudoku')) {
+    return 'https://source.unsplash.com/900x600/?puzzle,game,brain';
+  }
+
+  return `https://picsum.photos/seed/${encodeURIComponent(title.replace(/\s+/g, ''))}/900/600`;
 };
 
 const Projects = () => {
   const [hovered, setHovered] = useState<number | null>(null);
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.05 });
-
-  const featured = portfolioData.projects.slice(0, 2);
-  const rest = portfolioData.projects.slice(2);
 
   return (
     <section id="projects" className="py-32 relative">
@@ -58,110 +87,58 @@ const Projects = () => {
           </motion.p>
         </div>
 
-        {/* Featured 2 — large cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-          {featured.map((project, index) => (
-            <motion.div
-              key={project.title}
-              initial={{ opacity: 0, y: 30 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.8, delay: index * 0.12 }}
-              className="group relative"
-              onMouseEnter={() => setHovered(index)}
-              onMouseLeave={() => setHovered(null)}
-            >
-              <div className="relative aspect-[16/9] rounded-2xl overflow-hidden mb-5 bg-[#111]">
-                {/* Image */}
-                <img
-                  src={imageMap[project.title] ?? `https://picsum.photos/seed/${project.title.replace(/\s/g, '')}/800/500`}
-                  alt={project.title}
-                  className="w-full h-full object-cover transition-all duration-700 grayscale group-hover:grayscale-0 group-hover:scale-105"
-                  referrerPolicy="no-referrer"
-                />
-
-                {/* Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-[#080808] via-[#080808]/20 to-transparent" />
-
-                {/* Number */}
-                <div className="absolute top-5 left-5 font-mono text-[10px] tracking-widest text-white/30 uppercase">
-                  0{index + 1}
-                </div>
-
-                {/* Hover actions */}
-                <AnimatePresence>
-                  {hovered === index && (
-                    <motion.div
-                      initial={{ opacity: 0, y: 8 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: 8 }}
-                      transition={{ duration: 0.2 }}
-                      className="absolute bottom-5 right-5 flex gap-3"
-                    >
-                      <a href={project.link} target="_blank" rel="noreferrer"
-                         className="w-10 h-10 rounded-full bg-accent text-[#080808] flex items-center justify-center hover:scale-110 transition-transform">
-                        <Github size={16} />
-                      </a>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
-
-              {/* Meta */}
-              <div className="flex items-start justify-between gap-4 px-1">
-                <div>
-                  <div className="flex flex-wrap gap-2 mb-3">
-                    {(tagMap[project.title] ?? []).map(t => (
-                      <span key={t} className="tag">{t}</span>
-                    ))}
-                  </div>
-                  <h3 className="font-display font-bold text-2xl text-white group-hover:text-accent transition-colors mb-2">
-                    {project.title}
-                  </h3>
-                  <p className="text-text-secondary font-light text-sm leading-relaxed max-w-sm">
-                    {project.description}
-                  </p>
-                </div>
-                <a href={project.link} target="_blank" rel="noreferrer"
-                   className="flex-shrink-0 w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-text-secondary hover:border-accent hover:text-accent transition-all mt-1">
-                  <ArrowUpRight size={16} />
-                </a>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-
-        {/* Rest — compact list */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          {rest.map((project, index) => (
+        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
+          {portfolioData.projects.map((project, index) => (
             <motion.a
               key={project.title}
               href={project.link}
               target="_blank"
               rel="noreferrer"
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 24 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.4 + index * 0.08 }}
-              className="group glass rounded-2xl p-5 hover:border-white/15 transition-all duration-300"
+              transition={{ duration: 0.7, delay: index * 0.08 }}
+              onMouseEnter={() => setHovered(index)}
+              onMouseLeave={() => setHovered(null)}
+              className="group glass overflow-hidden rounded-[1.75rem] border border-white/10 shadow-[0_20px_80px_rgba(0,0,0,0.18)] transition-all duration-300 hover:-translate-y-1 hover:border-accent/30"
             >
-              <div className="flex items-start justify-between mb-4">
-                <span className="font-mono text-[9px] tracking-widest text-text-secondary uppercase">
-                  0{index + 3}
-                </span>
-                <ExternalLink size={13} className="text-text-secondary group-hover:text-accent transition-colors" />
-              </div>
-              <h4 className="font-display font-semibold text-white text-base mb-2 group-hover:text-accent transition-colors leading-tight">
-                {project.title}
-              </h4>
-              <p className="text-text-secondary text-xs leading-relaxed line-clamp-3">
-                {project.description}
-              </p>
-              {tagMap[project.title] && (
-                <div className="flex flex-wrap gap-1.5 mt-4">
-                  {tagMap[project.title].slice(0, 2).map(t => (
-                    <span key={t} className="text-[9px] font-mono uppercase tracking-wider px-2 py-0.5 rounded-full bg-white/5 text-text-secondary">{t}</span>
+              <div className="relative aspect-[16/9] bg-[#111] overflow-hidden">
+                <img
+                  src={imageMap[project.title] ?? fallbackImage(project.title)}
+                  alt={project.title}
+                  className="w-full h-full object-cover transition-all duration-700 grayscale group-hover:grayscale-0 group-hover:scale-105"
+                  referrerPolicy="no-referrer"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#080808] via-[#080808]/20 to-transparent" />
+                <div className="absolute top-5 left-5 font-mono text-[10px] tracking-widest text-white/30 uppercase">
+                  0{index + 1}
+                </div>
+                <div className="absolute bottom-5 left-5 flex flex-wrap gap-2">
+                  {(tagMap[project.title] ?? []).slice(0, 2).map(t => (
+                    <span key={t} className="tag bg-black/30 border-white/10 text-white/80">{t}</span>
                   ))}
                 </div>
-              )}
+              </div>
+
+              <div className="px-6 py-5">
+                <div className="flex items-start justify-between gap-3 mb-4">
+                  <div>
+                    <h3 className="font-display text-2xl font-bold text-white transition-colors group-hover:text-accent">
+                      {project.title}
+                    </h3>
+                    <p className="text-text-secondary text-sm leading-relaxed mt-2">
+                      {project.description}
+                    </p>
+                  </div>
+                  <ExternalLink size={18} className="text-text-secondary transition-colors group-hover:text-accent" />
+                </div>
+                <div className="flex flex-wrap gap-2 mt-2">
+                  {(tagMap[project.title] ?? []).map(t => (
+                    <span key={t} className="text-[10px] font-mono uppercase tracking-[0.18em] px-3 py-1 rounded-full bg-white/5 text-text-secondary">
+                      {t}
+                    </span>
+                  ))}
+                </div>
+              </div>
             </motion.a>
           ))}
         </div>

@@ -53,8 +53,8 @@ const About = () => {
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             className="lg:col-span-2 glass rounded-3xl overflow-hidden relative group min-h-[360px]"
           >
-            <div className="absolute inset-0 bg-[url('/pfp.jpeg')] bg-cover bg-center opacity-30 grayscale group-hover:opacity-50 group-hover:grayscale-0 transition-all duration-700" />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#080808] via-[#080808]/60 to-transparent" />
+            <div className="absolute inset-0 bg-[url('/pfp.png')] bg-cover bg-[position:50%_30%] bg-no-repeat opacity-30 grayscale group-hover:opacity-50 group-hover:grayscale-0 transition-all duration-700" />
+            <div className="absolute inset-0 bg-gradient-to-t from-gray-600/25 via-gray-600/12 to-transparent" />
 
             <div className="absolute bottom-0 left-0 right-0 p-8">
               <p className="font-display text-3xl font-bold text-white mb-1">Aiman Momin</p>

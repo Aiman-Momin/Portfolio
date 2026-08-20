@@ -8,12 +8,6 @@ export const portfolioData = {
   },
   experience: [
     {
-      company: "Kalachain Creative Technologies Private Limited",
-      role: "Blockchain Full Stack Developer Intern",
-      period: "Jul 30, 2026 – Present",
-      description: "Built and deployed blockchain-based certificate management solutions using smart contracts on mainnet. Developed a full-stack admin dashboard integrated with a database to securely manage participant records and automate certificate minting and verification through a seamless one-click workflow.",
-    },
-    {
       company: "Neftit",
       role: "Frontend Developer Intern",
       period: "Jun 2025 – Aug 2025",

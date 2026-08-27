@@ -23,41 +23,60 @@ export const portfolioData = {
   ],
   projects: [
     {
-      title: "EtherMuseum",
+      title: "Sentra",
+      description: "A non-custodial security platform that checks a crypto wallet's real on-chain history for sweeper-bot behavior before you send it funds and gives you a risk score, the evidence behind it and a clear recommendation.",
+      github: "https://github.com/Aiman-Momin/sentra",
+      live: "https://sentra-frontend-three.vercel.app/",
+      link: "https://github.com/Aiman-Momin/sentra",
+    },
+    {
+      title: "Continuum Protocol",
+      description: "A secure blockchain-based wallet with inheritance features.",
+      github: "https://github.com/Aiman-Momin/Continuum-Protocol",
+      live: "https://continuum-protocol.vercel.app/",
+      link: "https://github.com/Aiman-Momin/Continuum-Protocol",
+    },
+    {
+      title: "Nasreen Collection",
+      description: "Built and deployed a complete e-commerce storefront for a small toy shop with responsive design and modern UI.",
+      github: "https://github.com/Aiman-Momin/Nasreen-Collection",
+      live: "https://nasreen-collection.vercel.app/",
+      link: "https://github.com/Aiman-Momin/Nasreen-Collection",
+    },
+    {
+      title: "Collaborative Whiteboard",
+      description: "A real-time collaborative tool for brainstorming and idea sharing.",
+      github: "https://github.com/Aiman-Momin/Collaborative-Whiteboard",
+      live: "https://collaborative-whiteboard-weld.vercel.app/",
+      link: "https://github.com/Aiman-Momin/Collaborative-Whiteboard",
+    },
+    {
+      title: "Ether Museum",
       description: "A decentralized application showcasing digital art and collectibles on the blockchain",
+      github: "https://github.com/Aiman-Momin/EtherMuseum",
+      live: "https://ether-museum.vercel.app/",
       link: "https://github.com/Aiman-Momin/EtherMuseum",
+    },
+    {
+      title: "Smart Study Scheduler",
+      description: "An intelligent tool to help students manage their study time effectively.",
+      github: "https://github.com/Aiman-Momin/smart-study-scheduler",
+      live: "https://aiman-momin.github.io/smart-study-scheduler/",
+      link: "https://github.com/Aiman-Momin/smart-study-scheduler",
     },
     {
       title: "Student Grade Tracker",
       description: "A system to track and analyze student academic performance.",
+      github: "https://github.com/Aiman-Momin/StudentGradeTracker",
+      live: undefined,
       link: "https://github.com/Aiman-Momin/StudentGradeTracker",
     },
     {
-      title: "Continnum Protocol",
-      description: "A secure blockchain-based wallet with inheritance features.",
-      link: "https://github.com/Aiman-Momin/Continuum-Protocol",
-    },
-    {
-      title: "A Collaborative Whiteboard",
-      description: "A real-time collaborative tool for brainstorming and idea sharing.",
-      link: "https://github.com/Aiman-Momin/Collaborative-Whiteboard",
-    },
-    
-    {
-      title: "Smart Study Scheduler",
-      description: "An intelligent tool to help students manage their study time effectively.",
-      link: "https://github.com/Aiman-Momin/smart-study-scheduler",
-    },
-
-    {
       title: "Sudoku Game",
       description: "A classic Sudoku game with a modern and interactive UI.",
+      github: "https://github.com/Aiman-Momin/Sudoku-Game",
+      live: undefined,
       link: "https://github.com/Aiman-Momin/Sudoku-Game",
-    },
-    {
-      title: "Nasreen Collections",
-      description: "Built and deployed a complete e-commerce storefront for a small toy shop with responsive design and modern UI.",
-      link: "https://github.com/Aiman-Momin/Nasreen-Collection",
     }
   ],
   skills: [

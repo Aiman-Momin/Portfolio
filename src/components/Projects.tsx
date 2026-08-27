@@ -5,23 +5,25 @@ import { useInView } from 'react-intersection-observer';
 import { ExternalLink } from 'lucide-react';
 
 const imageMap: Record<string, string> = {
-  EtherMuseum: '/images/museum.png',
-  'Continnum Protocol': '/images/continnum.png',
-  'A Collaborative Whiteboard': '/images/whiteboard.png',
+  Sentra: '/images/sentra.png',
+  'Continuum Protocol': '/images/continnum.png',
+  'Collaborative Whiteboard': '/images/whiteboard.png',
+  'Ether Museum': '/images/museum.png',
   'Student Grade Tracker': '/images/grade.png',
   'Smart Study Scheduler': '/images/study.png',
   'Sudoku Game': '/images/sudoku.png',
-  'Nasreen Collections': '/images/nasreen.png',
+  'Nasreen Collection': '/images/nasreen.png',
 };
 
 const tagMap: Record<string, string[]> = {
-  EtherMuseum: ['Solidity', 'React', 'Web3'],
-  'Continnum Protocol': ['Blockchain', 'Solidity', 'DApp'],
-  'A Collaborative Whiteboard': ['React', 'Socket.io', 'Canvas'],
+  Sentra: ['Security', 'Wallet', 'On-chain'],
+  'Continuum Protocol': ['Blockchain', 'Solidity', 'DApp'],
+  'Collaborative Whiteboard': ['React', 'Socket.io', 'Canvas'],
+  'Ether Museum': ['Solidity', 'React', 'Web3'],
   'Student Grade Tracker': ['Java', 'Data'],
   'Smart Study Scheduler': ['TypeScript', 'React'],
   'Sudoku Game': ['JavaScript', 'UI'],
-  'Nasreen Collections': ['TypeScript', 'React', 'Vercel'],
+  'Nasreen Collection': ['TypeScript', 'React', 'Vercel'],
 };
 
 const fallbackImage = (title: string) => {
@@ -88,59 +90,83 @@ const Projects = () => {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
-          {portfolioData.projects.map((project, index) => (
-            <motion.a
-              key={project.title}
-              href={project.link}
-              target="_blank"
-              rel="noreferrer"
-              initial={{ opacity: 0, y: 24 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.7, delay: index * 0.08 }}
-              onMouseEnter={() => setHovered(index)}
-              onMouseLeave={() => setHovered(null)}
-              className="group glass overflow-hidden rounded-[1.75rem] border border-white/10 shadow-[0_20px_80px_rgba(0,0,0,0.18)] transition-all duration-300 hover:-translate-y-1 hover:border-accent/30"
-            >
-              <div className="relative aspect-[16/9] bg-[#111] overflow-hidden">
-                <img
-                  src={imageMap[project.title] ?? fallbackImage(project.title)}
-                  alt={project.title}
-                  className="w-full h-full object-cover transition-all duration-700 grayscale group-hover:grayscale-0 group-hover:scale-105"
-                  referrerPolicy="no-referrer"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#080808] via-[#080808]/20 to-transparent" />
-                <div className="absolute top-5 left-5 font-mono text-[10px] tracking-widest text-white/30 uppercase">
-                  0{index + 1}
-                </div>
-                <div className="absolute bottom-5 left-5 flex flex-wrap gap-2">
-                  {(tagMap[project.title] ?? []).slice(0, 2).map(t => (
-                    <span key={t} className="tag bg-black/30 border-white/10 text-white/80">{t}</span>
-                  ))}
-                </div>
-              </div>
+          {portfolioData.projects.map((project, index) => {
+            const primaryLink = project.live || project.github || project.link;
 
-              <div className="px-6 py-5">
-                <div className="flex items-start justify-between gap-3 mb-4">
-                  <div>
-                    <h3 className="font-display text-2xl font-bold text-white transition-colors group-hover:text-accent">
-                      {project.title}
-                    </h3>
-                    <p className="text-text-secondary text-sm leading-relaxed mt-2">
-                      {project.description}
-                    </p>
+            return (
+              <motion.div
+                key={project.title}
+                initial={{ opacity: 0, y: 24 }}
+                animate={inView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.7, delay: index * 0.08 }}
+                onMouseEnter={() => setHovered(index)}
+                onMouseLeave={() => setHovered(null)}
+                className="group glass overflow-hidden rounded-[1.75rem] border border-white/10 shadow-[0_20px_80px_rgba(0,0,0,0.18)] transition-all duration-300 hover:-translate-y-1 hover:border-accent/30"
+              >
+                <a href={primaryLink} target="_blank" rel="noreferrer" className="block">
+                  <div className="relative aspect-[16/9] bg-[#111] overflow-hidden">
+                    <img
+                      src={imageMap[project.title] ?? fallbackImage(project.title)}
+                      alt={project.title}
+                      className="w-full h-full object-cover transition-all duration-700 grayscale group-hover:grayscale-0 group-hover:scale-105"
+                      referrerPolicy="no-referrer"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#080808] via-[#080808]/20 to-transparent" />
+                    <div className="absolute top-5 left-5 font-mono text-[10px] tracking-widest text-white/30 uppercase">
+                      0{index + 1}
+                    </div>
+                    <div className="absolute bottom-5 left-5 flex flex-wrap gap-2">
+                      {(tagMap[project.title] ?? []).slice(0, 2).map(t => (
+                        <span key={t} className="tag bg-black/30 border-white/10 text-white/80">{t}</span>
+                      ))}
+                    </div>
                   </div>
-                  <ExternalLink size={18} className="text-text-secondary transition-colors group-hover:text-accent" />
+
+                  <div className="px-6 py-5">
+                    <div className="flex items-start justify-between gap-3 mb-4">
+                      <div>
+                        <h3 className="font-display text-2xl font-bold text-white transition-colors group-hover:text-accent">
+                          {project.title}
+                        </h3>
+                        <p className="text-text-secondary text-sm leading-relaxed mt-2">
+                          {project.description}
+                        </p>
+                      </div>
+                      <ExternalLink size={18} className="text-text-secondary transition-colors group-hover:text-accent" />
+                    </div>
+                    <div className="flex flex-wrap gap-2 mt-2">
+                      {(tagMap[project.title] ?? []).map(t => (
+                        <span key={t} className="text-[10px] font-mono uppercase tracking-[0.18em] px-3 py-1 rounded-full bg-white/5 text-text-secondary">
+                          {t}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </a>
+
+                <div className="px-6 pb-6 flex flex-wrap gap-3">
+                  <a
+                    href={project.github || project.link}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center rounded-full border border-white/10 bg-white/5 px-3 py-2 text-xs font-medium text-white/80 transition hover:border-accent/40 hover:text-accent"
+                  >
+                    GitHub
+                  </a>
+                  {project.live && (
+                    <a
+                      href={project.live}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex items-center rounded-full border border-accent/30 bg-accent/10 px-3 py-2 text-xs font-medium text-accent transition hover:bg-accent/20"
+                    >
+                      Live
+                    </a>
+                  )}
                 </div>
-                <div className="flex flex-wrap gap-2 mt-2">
-                  {(tagMap[project.title] ?? []).map(t => (
-                    <span key={t} className="text-[10px] font-mono uppercase tracking-[0.18em] px-3 py-1 rounded-full bg-white/5 text-text-secondary">
-                      {t}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </motion.a>
-          ))}
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </section>

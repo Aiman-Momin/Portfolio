@@ -105,7 +105,7 @@ const Experience = () => {
             <div className="rounded-2xl border border-accent/15 bg-accent/5 p-6">
               <p className="text-[10px] font-mono uppercase tracking-widest text-accent mb-3">Current Focus</p>
               <p className="text-white/70 text-sm font-light leading-relaxed">
-                Spending most of my time turning messy ideas into working code — and occasionally writing docs nobody reads.
+                Spending most of my time turning messy ideas into working code and occasionally writing docs nobody reads.
               </p>
             </div>
           </motion.div>

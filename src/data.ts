@@ -4,7 +4,7 @@ export const portfolioData = {
   tagline: "Turning “it should work” into “okay, it works”",
   about: {
     title: "About Me",
-    content: "I write code, fix bugs and sometimes create new ones by accident. I’m passionate about building web apps that actually work, not just in demos, but in real use. I like clean design, smooth functionality and solutions that don’t require a 10-minute explanation. Most of my growth has come from breaking things and then figuring out how to fix them which, turns out, is basically the job. And that’s pretty much how things have been going",
+    content: "Most of what I've learned about building software came from watching things break; a wallet-risk detector flagging false positives at 2am, a transaction flow that worked perfectly until it didn't. I build web and Web3 apps that are meant to survive contact with actual users. Clean design, functionality that doesn't need a walkthrough, nothing that makes you go \"wait, how do I...\". Turns out most of the job is just figuring out why something broke.",
   },
   experience: [
     {

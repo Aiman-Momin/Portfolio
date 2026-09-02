@@ -121,7 +121,7 @@ const Hero = () => {
           >
             {[
               { value: '6+', label: 'Projects shipped' },
-              { value: '1', label: 'Internship' },
+              { value: '2', label: 'Internships' },
               { value: '∞', label: 'Bugs fixed' },
             ].map(stat => (
               <div key={stat.label} className="text-right">
